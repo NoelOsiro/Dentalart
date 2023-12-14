@@ -1,0 +1,18 @@
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .login-card {
+    background-color: #fff; /* Set your desired background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Apply a box shadow with blur effect */
+    width: 300px; /* Set your desired width */
+  }
+  .login-card-title {
+    text-align: center;
+  }
+  
