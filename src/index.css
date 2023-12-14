@@ -13,3 +13,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.custom-row {
+  background-color: rgba(255, 255, 255, 0.9); /* White semi-transparent background */
+  border-radius: 10px; /* Border radius for rounded corners */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle lift effect */
+  margin-bottom: 20px; /* Margin to separate each row */
+  padding: 20px; /* Padding for content within the row */
+}

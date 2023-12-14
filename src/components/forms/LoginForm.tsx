@@ -1,6 +1,6 @@
 // LoginForm.tsx
 import React from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, FloatingLabel } from 'react-bootstrap';
 
 
 interface FormField {
@@ -32,22 +32,21 @@ const LoginForm: React.FC<LoginFormProps> = ({ formFields, handleLogin, showErro
     )}
 
     {formFields.map((field) => (
-      <Form.Group key={field.controlId} controlId={field.controlId} className={field.controlId === 'email' ? 'first' : 'last mb-4'}>
-        <Form.Label>{field.label}</Form.Label>
-        <Form.Control
-          type={field.type}
-          placeholder={field.placeholder}
-          value={field.value}
-          onChange={(e) => {
-            field.setValue(e.target.value);
-            showError && setShowError(false);
-          }}
-          isInvalid={showError}
-        />
-        <Form.Control.Feedback type="invalid">
-          {field.feedbackMessage}
-        </Form.Control.Feedback>
-      </Form.Group>
+      <FloatingLabel
+      key={field.controlId}
+      controlId={field.controlId}
+      label={field.label}
+      className="mb-3"
+    >
+      <Form.Control type={field.type} placeholder={field.placeholder} value={field.value}
+      onChange={(e) => {
+        field.setValue(e.target.value);
+        showError && setShowError(false);
+      }}
+      isInvalid={showError} />
+      <Form.Control.Feedback type="invalid">{field.feedbackMessage}</Form.Control.Feedback>
+    </FloatingLabel>
+
     ))}
 
     <Form.Group className="d-flex mb-5 align-items-center">

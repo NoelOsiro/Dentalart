@@ -10,7 +10,7 @@ import ErrorPage from "./pages/errorPage";
 import reportWebVitals from './reportWebVitals';
 import LoginPage from './pages/loginPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import OffcanvasExample from './pages/homePage';
+import HomePage from './pages/homePage';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "home",
-        element: <OffcanvasExample />,
+        element: <HomePage />,
       },
     ],
     
