@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './LoginPage.css';
 import LoginForm from '../components/forms/LoginForm';
+import { supabase } from '../utils/supabase';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState(false);
   const [showError, setShowError] = useState<boolean>(false);
 
   const formFields = [
@@ -32,12 +34,26 @@ const LoginPage: React.FC = () => {
       feedbackMessage: 'Please enter a valid password.',
     },
   ];
-  const handleLogin = () => {
+
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
     if (email.trim() === '' || password.trim() === '') {
       setShowError(true);
+      setLoading(false);
       return;
     }
-    console.log(`Logging in with Email: ${email} and Password: ${password}`);
+    const { data, error: supabaseError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    if (supabaseError) {
+      alert(supabaseError.message);
+    } else {
+      alert('Check your email for the login link!');
+    }
+
+    setLoading(false);
   };
 
   return (
@@ -58,7 +74,7 @@ const LoginPage: React.FC = () => {
                   formFields={formFields}
                   showError={showError}
                   setShowError={setShowError}
-                  handleLogin={handleLogin}
+                  handleLogin={()=>handleLogin}
                 />
               </Col>
             </Row>
