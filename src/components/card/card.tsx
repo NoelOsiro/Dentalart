@@ -57,18 +57,19 @@ function renderCardContent(card: CardData): React.ReactNode {
     case 'patientsAdded':
       return (
         <Card.Text>
-          {`${card.value} / ${card.total} patients added (${((card.value / card.total!) * 100).toFixed(2)}%)`}
+          <span className='text-primary' style={{ fontWeight: 'bold', fontSize:32 }}>{card.value} / {card.total}</span> patients added (
+          <span className='text-primary' style={{ fontWeight: 'bold', color: 'warning' }}>{((card.value / card.total!) * 100).toFixed(2)}%</span>)
         </Card.Text>
       );
     case 'progress':
       return (
         <>
-          <ProgressBar now={card.value} label={`${card.value}%`} visuallyHidden />
-          <Card.Text>{`${card.value}% completed`}</Card.Text>
+          <ProgressBar now={card.value} label={<span className='text-warning'  style={{ fontWeight: 'bold',fontSize:32 }}>{`${card.value}%`}</span>} visuallyHidden />
+          <Card.Text>{<span className='text-warning' style={{ fontWeight: 'bold',fontSize:32 }}>{`${card.value}%`}</span>} completed</Card.Text>
         </>
       );
     case 'recordsVerified':
-      return <Card.Text>{card.value} <br/> records verified</Card.Text>;
+      return <Card.Text><span className='text-success' style={{ fontWeight: 'bold',fontSize:32}}>{card.value}</span> records verified</Card.Text>;
     default:
       return null;
   }
