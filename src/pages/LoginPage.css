@@ -1,18 +1,80 @@
-.login-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+p {
+  color: #0009;
+  font-weight: 300;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+.mb-4 h3 {
+  text-align: center;
+}
+.content {
+  padding: 5rem 0;
+}
+
+.content .container {
+  background: white;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 991.98px) {
+  .content .bg {
+    height: 500px;
   }
-  
-  .login-card {
-    background-color: #fff; /* Set your desired background color */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Apply a box shadow with blur effect */
-    width: 300px; /* Set your desired width */
+}
+
+.content .contents,
+.content .bg {
+  width: 50%;
+}
+
+.contents .col-md-6{
+  background: #c1b8b83b;
+}
+@media (max-width: 1199.98px) {
+
+  .content .contents,
+  .content .bg {
+    width: 100%;
   }
-  .login-card-title {
-    text-align: center;
-  }
-  
+}
+
+.content a {
+  color: #888;
+  text-decoration: underline;
+}
+
+content .contents .form-group, .content .bg .form-group {
+  overflow: hidden;
+  margin-bottom: 0;
+  padding: 15px 15px;
+  border-bottom: none;
+  position: relative;
+  background: #edf2f5;
+  border-bottom: 1px solid #e6edf1;
+}
+.content .contents .form-group.last, .content .bg .form-group.last {
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+.content .contents .form-group.first, .content .bg .form-group.first {
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+.content .btn {
+  height: 54px;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 100%;
+}
+
+
+.content .forgot-pass {
+  position: relative;
+  top: 2px;
+  font-size: 14px;
+}

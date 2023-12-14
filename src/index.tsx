@@ -9,6 +9,8 @@ import Root from "./routes/root";
 import ErrorPage from "./pages/errorPage";
 import reportWebVitals from './reportWebVitals';
 import LoginPage from './pages/loginPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import OffcanvasExample from './pages/homePage';
 
 const router = createBrowserRouter([
   {
@@ -17,10 +19,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "login",
-        element: <LoginPage />,
+        path: "home",
+        element: <OffcanvasExample />,
       },
     ],
+    
+  },
+  {
+    path: "login",
+    element: <LoginPage />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
