@@ -24,7 +24,7 @@ interface LoginFormProps {
 
 
 const LoginForm: React.FC<LoginFormProps> = ({ formFields, handleLogin, showError, setShowError }) => (
-  <Form>
+  <Form onSubmit={handleLogin}>
     {showError && (
       <Alert variant="danger" className="mt-3">
         Please fill in all fields.
@@ -57,7 +57,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ formFields, handleLogin, showErro
         </a>
       </span>
     </Form.Group>
-    <Button variant="primary" type="button" onClick={handleLogin}>
+    <Button variant="primary" type="submit">
       Log In
     </Button>
   </Form>
