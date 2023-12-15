@@ -1,5 +1,5 @@
 // LoginForm.tsx
-import React from 'react';
+import React, {FormEvent} from 'react';
 import { Form, Button, Alert, FloatingLabel } from 'react-bootstrap';
 
 
@@ -17,7 +17,7 @@ interface FormField {
 
 interface LoginFormProps {
   formFields: FormField[];
-  handleLogin: () => void;
+  handleLogin: (event: FormEvent<HTMLFormElement>) => Promise<void>;
   showError: boolean;
   setShowError: React.Dispatch<React.SetStateAction<boolean>>;
 }
