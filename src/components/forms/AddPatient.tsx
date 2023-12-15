@@ -64,6 +64,17 @@ const AddPatientForm = () => {
   return (
     <Container>
       <Row>
+      {showError && (
+        <Alert variant="danger" className="mt-3" onClose={() => setShowError(false)} dismissible>
+          Please fill in all required fields.
+        </Alert>
+      )}
+
+      {showSuccess && (
+        <Alert variant="success" className="mt-3" onClose={() => setShowSuccess(false)} dismissible>
+          Patient added successfully!
+        </Alert>
+      )}
         <PatientFormField
           controlId="firstName"
           label="First Name"
@@ -171,22 +182,10 @@ const AddPatientForm = () => {
           </div>
         </PatientFormField>
       </Row>
-
-      {showError && (
-        <Alert variant="danger" className="mt-3" onClose={() => setShowError(false)} dismissible>
-          Please fill in all required fields.
-        </Alert>
-      )}
-
-      {showSuccess && (
-        <Alert variant="success" className="mt-3" onClose={() => setShowSuccess(false)} dismissible>
-          Patient added successfully!
-        </Alert>
-      )}
-
       <Button variant="primary" type="button" className="mt-4" onClick={handleAddPatient} disabled={loading}>
         {loading ? 'Adding Patient...' : 'Add Patient'}
       </Button>
+      
     </Container>
   );
 };

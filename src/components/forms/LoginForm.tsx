@@ -57,7 +57,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ formFields, handleLogin, showErro
         </a>
       </span>
     </Form.Group>
-    <Button variant="primary" type="submit">
+    <Button variant="primary" type="submit" >
       Log In
     </Button>
   </Form>
