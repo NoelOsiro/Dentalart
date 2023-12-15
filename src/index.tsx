@@ -12,18 +12,6 @@ import LoginPage from './pages/loginPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/homePage';
 
-const ProtectedRoute = ({ element }: { element: React.ReactNode }) => {
-  const session = supabase.auth.getSession();
-
-  useEffect(() => {
-    if (!session) {
-      // Redirect to the login page if there is no active session
-      window.location.href = '/login';
-    }
-  }, [session]);
-
-  return <>{element}</>;
-};
 
 const router = createBrowserRouter([
   {
