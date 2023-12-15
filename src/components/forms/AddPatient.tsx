@@ -8,7 +8,6 @@ const AddPatientForm = () => {
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [age, setAge] = useState(0); // Changed from dob to age
   const [address, setAddress] = useState('');
@@ -24,7 +23,7 @@ const AddPatientForm = () => {
       setShowError(false);
       setShowSuccess(false);
 
-      if (!firstName || !lastName || !email || !phone || !age || !address || !gender || !occupation) {
+      if (!firstName || !lastName || !phone || !age || !address || !gender || !occupation) {
         setShowError(true);
         return;
       }
@@ -36,7 +35,6 @@ const AddPatientForm = () => {
             first_name: firstName,
             middle_name: middleName,
             last_name: lastName,
-            email: email,
             phone: phone,
             age: age, // Changed from dob to age
             address: address,
@@ -55,7 +53,6 @@ const AddPatientForm = () => {
         setFirstName('');
         setMiddleName('');
         setLastName('');
-        setEmail('');
         setPhone('');
         setAge(0);
         setAddress('');
@@ -103,16 +100,6 @@ const AddPatientForm = () => {
       </Row>
 
       <Row>
-        <PatientFormField
-          controlId="email"
-          label="Email"
-          type="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          isInvalid={showError && !email}
-          feedbackMessage="Please enter a valid email."
-        />
         <PatientFormField
           controlId="phone"
           label="Phone"
