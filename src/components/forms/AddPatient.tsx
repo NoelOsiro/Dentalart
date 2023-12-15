@@ -135,7 +135,7 @@ const AddPatientForm = () => {
       <Row>
         <PatientFormField
           controlId="gender"
-          label="Gender"
+          label=""
           type="text"
           value={gender}
           onChange={(e) => setGender(e.target.value)}
@@ -143,7 +143,7 @@ const AddPatientForm = () => {
           isInvalid={showError && !gender}
           feedbackMessage="Please select a gender."
         >
-          <div>
+          <div className='d-flex'>
             <Form.Check
               type="radio"
               id="male"

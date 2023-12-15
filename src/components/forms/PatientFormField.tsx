@@ -30,7 +30,7 @@ const PatientFormField: React.FC<PatientFormFieldProps> = ({
   <Col>
     <FloatingLabel controlId={controlId} label={label} className="mb-3">
       {isRadio ? (
-        <div>
+        <div >
           {children}
           <Form.Control.Feedback type="invalid">{feedbackMessage}</Form.Control.Feedback>
         </div>
