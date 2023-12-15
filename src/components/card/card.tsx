@@ -108,7 +108,7 @@ function renderCardContent(card: CardData): React.ReactNode {
       return (
         <>
           <ProgressBar now={card.value} label={<span className='text-warning' style={{ fontWeight: 'bold', fontSize: 32 }}>{`${card.value}%`}</span>} visuallyHidden />
-          <Card.Text>{<span className='text-warning' style={{ fontWeight: 'bold', fontSize: 32 }}>{((card.value / card.total!) * 100).toFixed(1)}%</span>} completed</Card.Text>
+          <Card.Text>{<span className='text-warning' style={{ fontWeight: 'bold', fontSize: 32 }}>{((card.value / 7000) * 100).toFixed(1)}%</span>} completed</Card.Text>
         </>
       );
     case 'recordsVerified':
