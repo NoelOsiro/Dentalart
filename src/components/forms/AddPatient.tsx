@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Button, Alert } from 'react-bootstrap';
 import PatientFormField from './PatientFormField';
-import { supabase } from '../utils/supabase';
+import { supabase } from '../../utils/supabase';
 
 const AddPatientForm = () => {
   const [firstName, setFirstName] = useState('');
