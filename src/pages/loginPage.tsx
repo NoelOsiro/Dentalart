@@ -74,7 +74,7 @@ const LoginPage: React.FC = () => {
                   formFields={formFields}
                   showError={showError}
                   setShowError={setShowError}
-                  handleLogin={()=>handleLogin}
+                  handleLogin={handleLogin}
                 />
               </Col>
             </Row>
