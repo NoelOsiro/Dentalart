@@ -128,7 +128,7 @@ const AddPatientForm = () => {
           label="Age"
           type="number"
           placeholder="Enter age"
-          value={Number(age)}
+          value={age}
           onChange={(e) => setAge(Number(e.target.value))}
           isInvalid={showError && !age}
           feedbackMessage="Please enter your age."
@@ -152,17 +152,19 @@ const AddPatientForm = () => {
         <PatientFormField
           controlId="gender"
           label="Gender"
-          as={Form.Select}
+          isSelect={true} // Use the isSelect prop with a value
           value={gender}
           onChange={(e) => setGender(e.target.value)}
           isInvalid={showError && !gender}
-          feedbackMessage="Please select a gender."
-        >
+          feedbackMessage="Please select a gender." type={'select'}        >
           <option value="" disabled>Select Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="other">Other</option>
         </PatientFormField>
+
+
+
         <PatientFormField
           controlId="occupation"
           label="Occupation"
