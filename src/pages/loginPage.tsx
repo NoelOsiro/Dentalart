@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './LoginPage.css';
+import { useNavigate } from 'react-router-dom';
 import LoginForm from '../components/forms/LoginForm';
 import { supabase } from '../utils/supabase';
 
@@ -9,6 +10,7 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [showError, setShowError] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const formFields = [
     {
@@ -50,7 +52,7 @@ const LoginPage: React.FC = () => {
     if (supabaseError) {
       alert(supabaseError.message);
     } else {
-      alert('Check your email for the login link!');
+      navigate('/home');
     }
 
     setLoading(false);

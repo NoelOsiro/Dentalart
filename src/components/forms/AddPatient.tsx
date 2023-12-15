@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Button, Alert } from 'react-bootstrap';
 import PatientFormField from './PatientFormField';
+import { supabase } from '../utils/supabase';
 
 const AddPatientForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -12,14 +13,52 @@ const AddPatientForm = () => {
   const [dob, setDob] = useState('');
   const [address, setAddress] = useState('');
   const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleAddPatient = () => {
-    if (!firstName || !lastName || !email || !phone || !dob || !address) {
-      setShowError(true);
-      return;
+  const handleAddPatient = async () => {
+    try {
+      setLoading(true);
+      setShowError(false);
+      setShowSuccess(false);
+
+      if (!firstName || !lastName || !email || !phone || !dob || !address) {
+        setShowError(true);
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('patients')
+        .insert([
+          {
+            first_name: firstName,
+            middle_name: middleName,
+            last_name: lastName,
+            email: email,
+            phone: phone,
+            dob: dob,
+            address: address,
+          },
+        ]);
+
+      if (error) {
+        console.error('Error adding patient:', error);
+        setShowError(true);
+      } else {
+        console.log('Patient added successfully:', data);
+        setShowSuccess(true);
+        // Optionally, you can reset the form fields here
+        setFirstName('');
+        setMiddleName('');
+        setLastName('');
+        setEmail('');
+        setPhone('');
+        setDob('');
+        setAddress('');
+      }
+    } finally {
+      setLoading(false);
     }
-    window.alert(firstName
-    );
   };
 
   return (
@@ -56,6 +95,7 @@ const AddPatientForm = () => {
           feedbackMessage="Please enter your last name."
         />
       </Row>
+
       <Row>
         <PatientFormField
           controlId="email"
@@ -88,6 +128,7 @@ const AddPatientForm = () => {
           feedbackMessage="Please enter your date of birth."
         />
       </Row>
+
       <Row>
         <PatientFormField
           controlId="address"
@@ -100,13 +141,21 @@ const AddPatientForm = () => {
           feedbackMessage="Please enter your address."
         />
       </Row>
+
       {showError && (
-        <Alert variant="danger" className="mt-3">
+        <Alert variant="danger" className="mt-3" onClose={() => setShowError(false)} dismissible>
           Please fill in all required fields.
         </Alert>
       )}
-      <Button variant="primary" type="button" className="mt-4" onClick={handleAddPatient}>
-        Add Patient
+
+      {showSuccess && (
+        <Alert variant="success" className="mt-3" onClose={() => setShowSuccess(false)} dismissible>
+          Patient added successfully!
+        </Alert>
+      )}
+
+      <Button variant="primary" type="button" className="mt-4" onClick={handleAddPatient} disabled={loading}>
+        {loading ? 'Adding Patient...' : 'Add Patient'}
       </Button>
     </Container>
   );
