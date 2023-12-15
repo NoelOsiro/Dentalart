@@ -1,41 +1,56 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import {
   createBrowserRouter,
   RouterProvider,
-} from "react-router-dom";
-import Root from "./routes/root";
-import ErrorPage from "./pages/errorPage";
+  useRoutes,
+  Outlet,
+} from 'react-router-dom';
+import Root from './routes/root';
+import ErrorPage from './pages/errorPage';
 import reportWebVitals from './reportWebVitals';
 import LoginPage from './pages/loginPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/homePage';
+import { supabase } from './utils/supabase'; // Import your Supabase client
 
+const ProtectedRoute = ({ element }: { element: React.ReactNode }) => {
+  const session = supabase.auth.getSession();
 
-const router = createBrowserRouter([
+  useEffect(() => {
+    if (!session) {
+      window.location.href = '/login';
+    }
+  }, [session]);
+
+  return <>{element}</>;
+};
+
+const routes = [
   {
-    path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage />,
+    path: '/',
+    element: <ProtectedRoute element={<Root />} />,
     children: [
       {
-        path: "home",
+        path: 'home',
         element: <HomePage />,
       },
     ],
-    
   },
   {
-    path: "login",
+    path: 'login',
     element: <LoginPage />,
-    errorElement: <ErrorPage />,
   },
-]);
+];
+
+const router = createBrowserRouter(
+  routes
+);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
