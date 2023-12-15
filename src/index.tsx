@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css'
 import {
@@ -15,17 +15,34 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/homePage';
 import { supabase } from './utils/supabase'; // Import your Supabase client
 
-const ProtectedRoute = ({ element }: { element: React.ReactNode }) => {
-  const session = supabase.auth.getSession();
 
+const ProtectedRoute = ({ element }: { element: React.ReactNode }) => {
+  const [redirect, setRedirect] = useState(false);
   useEffect(() => {
-    if (!session) {
-      window.location.href = '/login';
-    }
-  }, [session]);
+    const checkSession = async () => {
+      try {
+        const { data, error:supabaseError } = await supabase.auth.refreshSession();
+        const { session } = data;
+        if (!session) {
+          setRedirect(true);
+        }
+      } catch (error) {
+        console.error('Error refreshing session:', error);
+      }
+    };
+    checkSession();
+  }, []);
+  if (redirect) {
+    window.location.href = '/login';
+    return null; 
+  }
 
   return <>{element}</>;
 };
+
+export default ProtectedRoute;
+
+
 
 const routes = [
   {

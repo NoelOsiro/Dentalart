@@ -1,5 +1,4 @@
 import { Container, Row } from "react-bootstrap";
-import HeaderBar from "../components/navbar/navbar";
 import CardBorder from "../components/card/card";
 import AddPatientForm from "../components/forms/AddPatient";
 
