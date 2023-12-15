@@ -1,6 +1,6 @@
 // AddPatientForm.tsx
 import React, { useState } from 'react';
-import { Container, Row, Button, Alert } from 'react-bootstrap';
+import { Container, Row, Button, Alert, Form } from 'react-bootstrap';
 import PatientFormField from './PatientFormField';
 import { supabase } from '../../utils/supabase';
 
@@ -10,8 +10,10 @@ const AddPatientForm = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [dob, setDob] = useState('');
+  const [age, setAge] = useState(''); // Changed from dob to age
   const [address, setAddress] = useState('');
+  const [gender, setGender] = useState(''); // Added gender field
+  const [occupation, setOccupation] = useState(''); // Added occupation field
   const [showError, setShowError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -22,7 +24,7 @@ const AddPatientForm = () => {
       setShowError(false);
       setShowSuccess(false);
 
-      if (!firstName || !lastName || !email || !phone || !dob || !address) {
+      if (!firstName || !lastName || !email || !phone || !age || !address || !gender || !occupation) {
         setShowError(true);
         return;
       }
@@ -36,8 +38,10 @@ const AddPatientForm = () => {
             last_name: lastName,
             email: email,
             phone: phone,
-            dob: dob,
+            age: age, // Changed from dob to age
             address: address,
+            gender: gender,
+            occupation: occupation,
           },
         ]);
 
@@ -53,8 +57,10 @@ const AddPatientForm = () => {
         setLastName('');
         setEmail('');
         setPhone('');
-        setDob('');
+        setAge('');
         setAddress('');
+        setGender('');
+        setOccupation('');
       }
     } finally {
       setLoading(false);
@@ -118,14 +124,14 @@ const AddPatientForm = () => {
           feedbackMessage="Please enter a valid phone number."
         />
         <PatientFormField
-          controlId="dob"
-          label="Date of Birth"
-          type="date"
-          placeholder="Enter date of birth"
-          value={dob}
-          onChange={(e) => setDob(e.target.value)}
-          isInvalid={showError && !dob}
-          feedbackMessage="Please enter your date of birth."
+          controlId="age" // Changed from dob to age
+          label="Age"
+          type="number"
+          placeholder="Enter age"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+          isInvalid={showError && !age}
+          feedbackMessage="Please enter your age."
         />
       </Row>
 
@@ -139,6 +145,33 @@ const AddPatientForm = () => {
           onChange={(e) => setAddress(e.target.value)}
           isInvalid={showError && !address}
           feedbackMessage="Please enter your address."
+        />
+      </Row>
+
+      <Row>
+        <PatientFormField
+          controlId="gender"
+          label="Gender"
+          as={Form.Select}
+          value={gender}
+          onChange={(e) => setGender(e.target.value)}
+          isInvalid={showError && !gender}
+          feedbackMessage="Please select a gender."
+        >
+          <option value="" disabled>Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </PatientFormField>
+        <PatientFormField
+          controlId="occupation"
+          label="Occupation"
+          type="text"
+          placeholder="Enter occupation"
+          value={occupation}
+          onChange={(e) => setOccupation(e.target.value)}
+          isInvalid={showError && !occupation}
+          feedbackMessage="Please enter your occupation."
         />
       </Row>
 
