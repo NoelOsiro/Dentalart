@@ -10,7 +10,7 @@ const AddPatientForm = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [age, setAge] = useState(''); // Changed from dob to age
+  const [age, setAge] = useState(0); // Changed from dob to age
   const [address, setAddress] = useState('');
   const [gender, setGender] = useState(''); // Added gender field
   const [occupation, setOccupation] = useState(''); // Added occupation field
@@ -57,7 +57,7 @@ const AddPatientForm = () => {
         setLastName('');
         setEmail('');
         setPhone('');
-        setAge('');
+        setAge(0);
         setAddress('');
         setGender('');
         setOccupation('');
