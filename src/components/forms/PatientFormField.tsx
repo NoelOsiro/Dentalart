@@ -1,6 +1,6 @@
 // PatientFormField.tsx
 import React, { ReactNode } from 'react';
-import { Col, FloatingLabel, Form } from 'react-bootstrap';
+import { Col, Form, FloatingLabel } from 'react-bootstrap';
 
 interface PatientFormFieldProps {
   controlId: string;
@@ -8,11 +8,11 @@ interface PatientFormFieldProps {
   type: string;
   placeholder?: string;
   value: string | number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isInvalid: boolean;
   feedbackMessage: string;
-  isSelect?: boolean;
-  children?: ReactNode; // Add this line for the children prop
+  isRadio?: boolean; // Added isRadio prop
+  children?: ReactNode;
 }
 
 const PatientFormField: React.FC<PatientFormFieldProps> = ({
@@ -24,19 +24,25 @@ const PatientFormField: React.FC<PatientFormFieldProps> = ({
   onChange,
   isInvalid,
   feedbackMessage,
-  isSelect = false,
+  isRadio = false,
   children,
 }) => (
   <Col>
     <FloatingLabel controlId={controlId} label={label} className="mb-3">
-      {isSelect ? (
-        <Form.Select value={value as string} onChange={onChange as any} isInvalid={isInvalid}>
+      {isRadio ? (
+        <div>
           {children}
-        </Form.Select>
+          <Form.Control.Feedback type="invalid">{feedbackMessage}</Form.Control.Feedback>
+        </div>
       ) : (
-        <Form.Control type={type} placeholder={placeholder} value={value} onChange={onChange as any} isInvalid={isInvalid} />
+        <Form.Control
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          isInvalid={isInvalid}
+        />
       )}
-      <Form.Control.Feedback type="invalid">{feedbackMessage}</Form.Control.Feedback>
     </FloatingLabel>
   </Col>
 );

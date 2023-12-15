@@ -12,7 +12,6 @@ const AddPatientForm = () => {
   const [age, setAge] = useState(0); // Changed from dob to age
   const [address, setAddress] = useState('');
   const [gender, setGender] = useState(''); // Added gender field
-  const [occupation, setOccupation] = useState(''); // Added occupation field
   const [showError, setShowError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -23,7 +22,7 @@ const AddPatientForm = () => {
       setShowError(false);
       setShowSuccess(false);
 
-      if (!firstName || !lastName || !phone || !age || !address || !gender || !occupation) {
+      if (!firstName || !lastName || !phone || !age || !address || !gender) {
         setShowError(true);
         return;
       }
@@ -39,7 +38,6 @@ const AddPatientForm = () => {
             age: age, // Changed from dob to age
             address: address,
             gender: gender,
-            occupation: occupation,
           },
         ]);
 
@@ -57,7 +55,6 @@ const AddPatientForm = () => {
         setAge(0);
         setAddress('');
         setGender('');
-        setOccupation('');
       }
     } finally {
       setLoading(false);
@@ -139,29 +136,40 @@ const AddPatientForm = () => {
         <PatientFormField
           controlId="gender"
           label="Gender"
-          isSelect={true} // Use the isSelect prop with a value
+          type="text"
           value={gender}
           onChange={(e) => setGender(e.target.value)}
+          isRadio={true} // Use the isRadio prop
           isInvalid={showError && !gender}
-          feedbackMessage="Please select a gender." type={'select'}        >
-          <option value="" disabled>Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          feedbackMessage="Please select a gender."
+        >
+          <div>
+            <Form.Check
+              type="radio"
+              id="male"
+              label="Male"
+              value="male"
+              checked={gender === 'male'}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            <Form.Check
+              type="radio"
+              id="female"
+              label="Female"
+              value="female"
+              checked={gender === 'female'}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            <Form.Check
+              type="radio"
+              id="other"
+              label="Other"
+              value="other"
+              checked={gender === 'other'}
+              onChange={(e) => setGender(e.target.value)}
+            />
+          </div>
         </PatientFormField>
-
-
-
-        <PatientFormField
-          controlId="occupation"
-          label="Occupation"
-          type="text"
-          placeholder="Enter occupation"
-          value={occupation}
-          onChange={(e) => setOccupation(e.target.value)}
-          isInvalid={showError && !occupation}
-          feedbackMessage="Please enter your occupation."
-        />
       </Row>
 
       {showError && (
