@@ -129,7 +129,7 @@ const AddPatientForm = () => {
           type="number"
           placeholder="Enter age"
           value={age}
-          onChange={(e) => setAge(e.target.value)}
+          onChange={(e) => setAge(Number(e.target.value))}
           isInvalid={showError && !age}
           feedbackMessage="Please enter your age."
         />
