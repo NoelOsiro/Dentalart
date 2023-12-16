@@ -112,16 +112,6 @@ const AddPatientForm = () => {
 
       <Row>
         <PatientFormField
-          controlId="phone"
-          label="Phone"
-          type="tel"
-          placeholder="Enter phone number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          isInvalid={showError && !phone}
-          feedbackMessage="Please enter a valid phone number."
-        />
-        <PatientFormField
           controlId="age" // Changed from dob to age
           label="Age"
           type="number"
@@ -131,23 +121,7 @@ const AddPatientForm = () => {
           isInvalid={showError && !age}
           feedbackMessage="Please enter your age."
         />
-      </Row>
-
-      <Row>
-        <PatientFormField
-          controlId="address"
-          label="Address"
-          type="textarea"
-          placeholder="Enter address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          isInvalid={showError && !address}
-          feedbackMessage="Please enter your address."
-        />
-      </Row>
-
-      <Row>
-        <PatientFormField
+         <PatientFormField
           controlId="gender"
           label=""
           type="text"
@@ -184,6 +158,30 @@ const AddPatientForm = () => {
             />
           </div>
         </PatientFormField>
+        
+      </Row>
+
+      <Row>
+         <PatientFormField
+          controlId="phone"
+          label="Phone"
+          type="tel"
+          placeholder="Enter phone number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          isInvalid={showError && !phone}
+          feedbackMessage="Please enter a valid phone number."
+        />
+        <PatientFormField
+          controlId="address"
+          label="Address"
+          type="textarea"
+          placeholder="Enter address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          isInvalid={showError && !address}
+          feedbackMessage="Please enter your address."
+        />
       </Row>
       <Button variant="primary" type="button" className="mt-4" onClick={handleAddPatient} disabled={loading}>
         {loading ? 'Adding Patient...' : 'Add Patient'}
