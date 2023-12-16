@@ -13,6 +13,7 @@ const AddPatientForm = () => {
   const [address, setAddress] = useState('');
   const [gender, setGender] = useState(''); // Added gender field
   const [showError, setShowError] = useState(false);
+  const [errorText, setErrorText] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -20,10 +21,12 @@ const AddPatientForm = () => {
     try {
       setLoading(true);
       setShowError(false);
+      setErrorText('');
       setShowSuccess(false);
 
       if (!firstName || !lastName || !phone || !age || !address || !gender) {
         setShowError(true);
+        setErrorText('Please fill in all required fields.');
         return;
       }
 
@@ -42,10 +45,9 @@ const AddPatientForm = () => {
         ]);
 
       if (error) {
-        console.error('Error adding patient:', error);
+        setErrorText('Duplicate phone number. Number already exists')
         setShowError(true);
       } else {
-        console.log('Patient added successfully:', data);
         setShowSuccess(true);
         // Optionally, you can reset the form fields here
         setFirstName('');
@@ -55,6 +57,7 @@ const AddPatientForm = () => {
         setAge(0);
         setAddress('');
         setGender('');
+        setErrorText('');
       }
     } finally {
       setLoading(false);
@@ -66,7 +69,7 @@ const AddPatientForm = () => {
       <Row>
       {showError && (
         <Alert variant="danger" className="mt-3" onClose={() => setShowError(false)} dismissible>
-          Please fill in all required fields.
+          {errorText}
         </Alert>
       )}
 
