@@ -32,7 +32,7 @@ const AddPatientForm = () => {
         .from('patients')
         .insert([
           {
-            full_name: full_name
+            full_name: full_name,
             phone: phone,
             age: age,
             address: address,
