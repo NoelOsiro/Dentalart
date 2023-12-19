@@ -76,7 +76,7 @@ const AddPatientForm = () => {
           type="text"
           placeholder="Enter name"
           value={full_name}
-          onChange={(e) => setFullame(earget.value)}
+          onChange={(e) => setFullName(earget.value)}
           isInvalid={showError && !full_name}
           feedbackMessage="Please enter your name."
         />
