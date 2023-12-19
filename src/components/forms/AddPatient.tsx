@@ -1,4 +1,3 @@
-6// AddPatientForm.tsx
 import React, { useState } from 'react';
 import { Container, Row, Button, Alert, Form } from 'react-bootstrap';
 import PatientFormField from './PatientFormField';
