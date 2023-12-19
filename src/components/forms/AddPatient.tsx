@@ -1,13 +1,11 @@
-// AddPatientForm.tsx
+6// AddPatientForm.tsx
 import React, { useState } from 'react';
 import { Container, Row, Button, Alert, Form } from 'react-bootstrap';
 import PatientFormField from './PatientFormField';
 import { supabase } from '../../utils/supabase';
 
 const AddPatientForm = () => {
-  const [firstName, setFirstName] = useState('');
-  const [middleName, setMiddleName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [full_name, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [age, setAge] = useState(0); // Changed from dob to age
   const [address, setAddress] = useState('');
@@ -34,11 +32,9 @@ const AddPatientForm = () => {
         .from('patients')
         .insert([
           {
-            first_name: firstName,
-            middle_name: middleName,
-            last_name: lastName,
+            full_name: full_name
             phone: phone,
-            age: age, // Changed from dob to age
+            age: age,
             address: address,
             gender: gender,
           },
@@ -49,10 +45,7 @@ const AddPatientForm = () => {
         setShowError(true);
       } else {
         setShowSuccess(true);
-        // Optionally, you can reset the form fields here
-        setFirstName('');
-        setMiddleName('');
-        setLastName('');
+        setFullName('');
         setPhone('');
         setAge(0);
         setAddress('');
@@ -79,35 +72,16 @@ const AddPatientForm = () => {
         </Alert>
       )}
         <PatientFormField
-          controlId="firstName"
-          label="First Name"
+          controlId="fullName"
+          label="Name"
           type="text"
-          placeholder="Enter first name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          isInvalid={showError && !firstName}
-          feedbackMessage="Please enter your first name."
+          placeholder="Enter name"
+          value={full_name}
+          onChange={(e) => setFirstName(earget.value)}
+          isInvalid={showError && !first_name}
+          feedbackMessage="Please enter your name."
         />
-        <PatientFormField
-          controlId="middleName"
-          label="Middle Name"
-          type="text"
-          placeholder="Enter middle name"
-          value={middleName}
-          onChange={(e) => setMiddleName(e.target.value)}
-          isInvalid={showError && !middleName}
-          feedbackMessage="Please enter your middle name."
-        />
-        <PatientFormField
-          controlId="lastName"
-          label="Last Name"
-          type="text"
-          placeholder="Enter last name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          isInvalid={showError && !lastName}
-          feedbackMessage="Please enter your last name."
-        />
+        
       </Row>
 
       <Row>
