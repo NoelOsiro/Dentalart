@@ -21,7 +21,7 @@ const AddPatientForm = () => {
       setErrorText('');
       setShowSuccess(false);
 
-      if (!firstName || !lastName || !phone || !age || !address || !gender) {
+      if (!full_name || !phone || !age || !address || !gender) {
         setShowError(true);
         setErrorText('Please fill in all required fields.');
         return;
